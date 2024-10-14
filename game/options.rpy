@@ -37,7 +37,8 @@ define gui.about = _p("""
 ## distribution. This must be ASCII-only, and must not contain spaces, colons,
 ## or semicolons.
 
-define build.name = "Renpy"
+define build.name = "College Simulator"
+define build.directory_name = "/"
 
 
 ## Sounds and music ############################################################

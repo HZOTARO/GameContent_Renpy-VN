@@ -1,0 +1,454 @@
+﻿# Declare characters used by this game. The color argument colorizes the name of the character.
+define narrator = Character(what_color="#000000")
+define MC = Character()
+define joshua = Character("Joshua", color="#777626")
+define christine = Character("Christine", color="#5000a7")
+define mary = Character("Kak Mary", color="#c26e00")
+define gerry = Character("Pak Gerry", color="#6f2700")
+define lecturer = Character("Dosen", color="#000000")
+define mahasiswa = Character("Mahasiswa", color="#000000")
+
+define PS = 0  # Programming Skill
+define DS = 0  # Design Skill
+define E = 10  # Energy
+
+# The game starts here.
+label start:
+    call semester_1
+    call semester_2
+    call semester_3
+    call semester_4
+    call semester_5
+    return
+
+label semester_1:
+    scene bg college outdoor with fade
+    "Kamu memulai semester pertama kuliah."
+
+    scene bg college teacherroom with dissolve
+    show gerry smile
+    gerry "Halo, perkenalkan nama saya Gerry. Saya yang akan menjadi dosen wali kalian sepanjang perkuliahan. Semangat kuliahnya!"
+
+    scene bg college classroom with fade
+    lecturer "Halo, perkenalkan saya yang akan mengajar kalian untuk mata kuliah Pemrograman Dasar sepanjang satu semester ini."
+    lecturer "Untuk awal perkuliahan kita akan belajar mengenai variabel dan tipe data, serta operasi matematika sederhana di dalam pemrograman"
+    $ PS += 1
+    $ E -= 1
+    # MC "PS = [PS], DS = [DS], E = [E]"
+
+    scene bg college hallway with dissolve
+    "Setelah kelas, kamu dihadapkan pada dua pilihan"
+    
+    menu:            
+        "Pergi ke perpustakaan":
+            scene bg library big with dissolve
+            "Kamu memutuskan untuk pergi ke perpustakaan untuk belajar."
+            MC "(Lebih baik aku belajar lebih awal untuk memastikan aku paham materi.)"
+            
+            menu:
+                "Belajar bahasa pemrograman":
+                    $ PS += 1
+                "Belajar algoritma pemrograman":
+                    $ DS += 1
+            $ E -= 1
+            "Kamu meningkatkan kemampuan pemrogramanmu, namun merasa sedikit lelah."
+        
+        "Istirahat di rumah":
+            scene bg home bedroom with dissolve
+            "Kamu memutuskan untuk pulang dan beristirahat di rumah."
+            MC "(Istirahat dulu agar aku punya lebih banyak energi nanti.)"
+            $ E += 1
+            "Kamu merasa lebih segar setelah beristirahat."
+
+    scene bg college hallway with fade
+    "Beberapa minggu berlalu, dan kamu sekarang harus menghadapi ujian."
+    MC "(Aku harus lulus dengan nilai bagus!)"
+    "Kamu lulus ujian dengan hasil yang memuaskan!"
+
+    scene bg college teacherroom with fade
+    "Kamu bertemu kembali dengan Pak Gerry untuk evaluasi semester."
+    gerry "Bagaimana perkuliahanmu satu semester ini?"
+    MC "Menurut saya baik kok Pak, aman."
+    gerry "Hmm.. saya lihat nilaimu bagus. Teruskan ya."
+    MC "Ok, Pak."
+    
+    "MC bersiap-siap untuk semester kedua."
+    return
+
+label semester_2:
+    scene bg college hallway with fade
+    "Semester 2 dimulai. MC kembali menghadapi tantangan baru dengan lebih banyak pilihan yang bisa diambil."
+
+    menu:
+        "Menghadiri kelas PBO":
+            jump kelas_pbo
+        
+        "Bertemu dengan Mary":
+            jump bertemu_mary
+        
+        "Pergi ke perpustakaan untuk belajar":
+            jump belajar_perpustakaan
+        
+        "Istirahat di rumah":
+            jump istirahat_rumah_2
+
+label kelas_pbo:
+    scene bg classroom with dissolve
+    "MC menghadiri kelas Pemrograman Berorientasi Objek (PBO)."
+    MC "Kelas ini cukup sulit, tapi aku akan mencoba yang terbaik."
+    $ PS += 20
+    $ E -= 10
+    narrator "MC meningkatkan keterampilan programming, tetapi merasa lelah."
+    jump semester_2_options
+
+label bertemu_mary:
+    scene bg cafe with dissolve
+    "MC memutuskan untuk bertemu dengan Mary."
+    mary "Hey, MC! Bagaimana kuliahmu?"
+    MC "Cukup menantang, bagaimana denganmu?"
+    mary "Aku juga merasa kesulitan. Ayo kita belajar bersama!"
+    narrator "Hubungan dengan Mary meningkat."
+    jump semester_2_options
+
+label belajar_perpustakaan:
+    scene bg library with dissolve
+    "MC pergi ke perpustakaan untuk belajar."
+    MC "Aku perlu memahami lebih banyak konsep pemrograman dan desain."
+    $ PS += 15
+    $ DS += 15
+    $ E -= 20
+    narrator "MC meningkatkan keterampilannya, tapi merasa lelah."
+    jump semester_2_options
+
+label istirahat_rumah_2:
+    scene bg home with dissolve
+    "MC memilih untuk istirahat di rumah."
+    MC "Aku butuh energi untuk minggu depan."
+    $ E += 20
+    narrator "MC merasa lebih baik setelah beristirahat."
+    jump semester_2_options
+
+label semester_2_options:
+    "Setelah beberapa aktivitas di semester 2, MC harus menghadapi ujian tengah semester."
+    
+    menu:
+        "Mempersiapkan diri dengan baik untuk ujian":
+            jump persiapan_ujian_2
+            
+        "Cuek lagi soal ujian":
+            jump cuek_ujian_2
+
+label persiapan_ujian_2:
+    scene bg classroom with dissolve
+    "MC memutuskan untuk mempersiapkan ujian dengan baik."
+    MC "Aku harus lebih siap kali ini."
+    $ PS += 20
+    $ DS += 20
+    $ E -= 20
+    narrator "MC lulus ujian dengan baik."
+    jump semester_2_evaluation
+
+label cuek_ujian_2:
+    scene bg classroom with dissolve
+    "MC tidak terlalu serius mempersiapkan ujian."
+    MC "Ujian ini tidak terlalu penting."
+    $ E += 10
+    narrator "Hasil ujian MC tidak terlalu bagus."
+    jump semester_2_evaluation
+
+label semester_2_evaluation:
+    scene bg office with dissolve
+    "MC bertemu dengan Pak Gerry lagi untuk evaluasi semester."
+    gerry "Bagaimana hasil ujianmu kali ini?"
+    if PS + DS > 50:
+        MC "Hasil ujian berjalan baik, Pak."
+        gerry "Luar biasa! Teruslah berusaha."
+    else:
+        MC "Sepertinya aku masih kurang fokus."
+        gerry "Jangan khawatir, kamu masih punya waktu untuk memperbaikinya."
+    
+    narrator "MC siap menghadapi semester ketiga."
+    jump semester_3_start
+
+label semester_3_start:
+    scene bg college campus with fade
+    "Semester 3 dimulai. Tantangan semakin besar, dan MC harus membuat pilihan yang bijak."
+
+    menu:
+        "Belajar di perpustakaan":
+            jump belajar_perpustakaan_3
+
+        "Belajar dengan Mary":
+            jump belajar_dengan_mary
+
+        "Istirahat di rumah":
+            jump istirahat_rumah_3
+
+        "Proyek dengan Joshua":
+            jump proyek_dengan_joshua
+
+label belajar_perpustakaan_3:
+    scene bg library with dissolve
+    "MC memutuskan untuk belajar di perpustakaan."
+    $ PS += 15
+    $ DS += 10
+    $ E -= 15
+    narrator "MC meningkatkan keterampilannya, namun merasa lelah."
+    jump semester_3_test
+
+label belajar_dengan_mary:
+    scene bg cafe with dissolve
+    "MC belajar bersama Mary."
+    $ DS += 15
+    $ E -= 10
+    narrator "MC belajar lebih efektif dengan bantuan Mary."
+    jump semester_3_test
+
+label istirahat_rumah_3:
+    scene bg home with dissolve
+    "MC memilih untuk istirahat di rumah."
+    $ E += 20
+    narrator "MC kembali segar setelah istirahat."
+    jump semester_3_test
+
+label proyek_dengan_joshua:
+    scene bg project with dissolve
+    "MC bekerja sama dengan Joshua untuk mengerjakan proyek."
+    $ PS += 10
+    $ DS += 10
+    $ E -= 10
+    narrator "Proyek berjalan dengan baik, namun MC merasa lelah."
+    jump semester_3_test
+
+label semester_3_test:
+    scene bg classroom with dissolve
+    "MC menghadapi ujian akhir semester 3."
+    
+    menu:
+        "Belajar keras untuk ujian":
+            jump belajar_keras_ujian_3
+            
+        "Cuek lagi dengan ujian":
+            jump cuek_ujian_3
+
+label belajar_keras_ujian_3:
+    scene bg classroom with dissolve
+    "MC memutuskan untuk belajar keras."
+    $ PS += 20
+    $ DS += 20
+    $ E -= 20
+    narrator "MC lulus ujian dengan hasil yang baik."
+    jump semester_3_evaluation
+
+label cuek_ujian_3:
+    scene bg classroom with dissolve
+    "MC tidak terlalu mempersiapkan ujian."
+    $ E += 10
+    narrator "Hasil ujian MC tidak terlalu baik."
+    jump semester_3_evaluation
+
+label semester_3_evaluation:
+    scene bg office with dissolve
+    "MC bertemu dengan Pak Gerry untuk evaluasi semester."
+    gerry "Bagaimana hasil ujianmu?"
+    if PS + DS > 70:
+        MC "Ujianku berjalan dengan sangat baik!"
+        gerry "Saya bangga dengan perkembanganmu."
+    else:
+        MC "Aku merasa masih kurang."
+        gerry "Tidak apa-apa, terus berusaha."
+    
+    narrator "MC bersiap untuk menghadapi semester 4."
+    jump semester_4_start
+
+label semester_4_start:
+    scene bg campus with fade
+    "Semester 4 dimulai. MC sekarang berada di pertengahan perkuliahan dan tantangan semakin berat. Ia harus lebih pintar dalam mengatur waktunya."
+
+    menu:
+        "Mengambil proyek magang":
+            jump proyek_magang
+        
+        "Menghadiri kelas desain interaktif":
+            jump kelas_desain_interaktif
+        
+        "Istirahat untuk menjaga energi":
+            jump istirahat_rumah_4
+
+        "Belajar bersama teman":
+            jump belajar_dengan_teman
+
+label proyek_magang:
+    scene bg office with dissolve
+    "MC memutuskan untuk mengambil proyek magang di sebuah perusahaan teknologi."
+    MC "Ini akan menjadi pengalaman yang sangat berharga untuk karierku."
+    $ PS += 25
+    $ E -= 15
+    narrator "MC meningkatkan keterampilan programming dengan pengalaman nyata, tetapi energinya terkuras."
+    jump semester_4_options
+
+label kelas_desain_interaktif:
+    scene bg classroom with dissolve
+    "MC menghadiri kelas desain interaktif untuk memperdalam keterampilannya."
+    MC "Kelas ini sangat menarik, aku bisa mengembangkan konsep desainku lebih baik."
+    $ DS += 20
+    $ E -= 10
+    narrator "MC meningkatkan keterampilan desain, tetapi merasa sedikit lelah."
+    jump semester_4_options
+
+label istirahat_rumah_4:
+    scene bg home with dissolve
+    "MC memutuskan untuk beristirahat di rumah untuk menjaga energinya."
+    MC "Aku perlu menjaga energi untuk menghadapi proyek dan ujian nanti."
+    $ E += 20
+    narrator "MC merasa lebih segar dan siap untuk tantangan berikutnya."
+    jump semester_4_options
+
+label belajar_dengan_teman:
+    scene bg library with dissolve
+    "MC belajar bersama beberapa temannya untuk saling membantu memahami materi."
+    MC "Dengan bantuan teman-teman, belajar jadi lebih mudah."
+    $ PS += 15
+    $ DS += 15
+    $ E -= 15
+    narrator "MC meningkatkan keterampilannya dalam programming dan desain."
+    jump semester_4_options
+
+label semester_4_options:
+    "Beberapa minggu berlalu, dan sekarang MC menghadapi ujian akhir semester 4."
+    
+    menu:
+        "Belajar intens untuk ujian":
+            jump belajar_intens_ujian_4
+            
+        "Santai dan tidak terlalu serius":
+            jump santai_ujian_4
+
+label belajar_intens_ujian_4:
+    scene bg classroom with dissolve
+    "MC memutuskan untuk belajar keras untuk ujian."
+    MC "Aku harus memberikan yang terbaik untuk hasil semester ini."
+    $ PS += 20
+    $ DS += 20
+    $ E -= 20
+    narrator "MC berhasil lulus ujian dengan hasil yang memuaskan."
+    jump semester_4_evaluation
+
+label santai_ujian_4:
+    scene bg classroom with dissolve
+    "MC tidak terlalu serius dalam mempersiapkan ujian."
+    MC "Aku rasa cukup dengan usaha yang sudah kulakukan."
+    $ E += 10
+    narrator "Hasil ujian MC biasa-biasa saja, tidak terlalu baik."
+    jump semester_4_evaluation
+
+label semester_4_evaluation:
+    scene bg office with dissolve
+    "MC bertemu dengan Pak Gerry untuk evaluasi semester."
+    gerry "Bagaimana dengan ujianmu kali ini?"
+    if PS + DS > 100:
+        MC "Hasilnya sangat baik, Pak. Saya merasa puas."
+        gerry "Bagus sekali, teruskan prestasimu!"
+    else:
+        MC "Sepertinya aku kurang maksimal, Pak."
+        gerry "Tidak apa-apa, tetap semangat. Kamu masih punya waktu untuk berkembang."
+
+    narrator "MC siap menghadapi semester kelima yang lebih menantang."
+    jump semester_5_start
+
+label semester_5_start:
+    scene bg campus with fade
+    "Semester 5 dimulai. MC sudah semakin dekat dengan akhir perkuliahan. Tanggung jawab semakin besar, namun ini juga kesempatan untuk mengambil keputusan yang lebih penting bagi kariernya."
+
+    menu:
+        "Mengambil proyek besar dengan dosen":
+            jump proyek_besar_dosen
+        
+        "Belajar intens untuk persiapan skripsi":
+            jump belajar_skripsi
+        
+        "Menjadi asisten dosen":
+            jump asisten_dosen
+        
+        "Beristirahat untuk menjaga kesehatan":
+            jump istirahat_rumah_5
+
+label proyek_besar_dosen:
+    scene bg office with dissolve
+    "MC memutuskan untuk mengambil proyek besar bersama salah satu dosennya."
+    MC "Ini adalah proyek yang sangat penting dan bisa membuka banyak peluang karier."
+    $ PS += 30
+    $ DS += 20
+    $ E -= 25
+    narrator "MC banyak belajar dari proyek ini, tetapi sangat melelahkan."
+    jump semester_5_options
+
+label belajar_skripsi:
+    scene bg library with dissolve
+    "MC mulai mempersiapkan diri untuk menyusun skripsi."
+    MC "Aku harus mulai sekarang agar nanti tidak kewalahan."
+    $ PS += 20
+    $ DS += 15
+    $ E -= 15
+    narrator "MC lebih siap untuk menghadapi skripsi, tetapi harus menjaga energi."
+    jump semester_5_options
+
+label asisten_dosen:
+    scene bg classroom with dissolve
+    "MC memutuskan untuk menjadi asisten dosen dalam salah satu mata kuliah."
+    MC "Ini bisa menjadi pengalaman yang baik dan memperkuat koneksi akademikku."
+    $ PS += 20
+    $ DS += 10
+    $ E -= 20
+    narrator "MC belajar banyak dari peran sebagai asisten dosen, namun merasa kelelahan."
+    jump semester_5_options
+
+label istirahat_rumah_5:
+    scene bg home with dissolve
+    "MC memilih untuk beristirahat di rumah agar tidak terlalu stres."
+    MC "Aku butuh waktu untuk diriku sendiri sebelum terlalu banyak tekanan."
+    $ E += 25
+    narrator "MC merasa lebih siap untuk tantangan selanjutnya."
+    jump semester_5_options
+
+label semester_5_options:
+    "Sekarang MC menghadapi ujian dan evaluasi besar pada akhir semester 5."
+
+    menu:
+        "Belajar keras untuk ujian akhir":
+            jump belajar_keras_ujian_5
+            
+        "Cuek saja soal ujian":
+            jump cuek_ujian_5
+
+label belajar_keras_ujian_5:
+    scene bg classroom with dissolve
+    "MC memutuskan untuk belajar keras dan mempersiapkan ujian akhir semester."
+    MC "Aku harus memastikan hasil yang maksimal untuk semester ini."
+    $ PS += 20
+    $ DS += 20
+    $ E -= 20
+    narrator "MC berhasil lulus dengan nilai yang baik."
+    jump semester_5_evaluation
+
+label cuek_ujian_5:
+    scene bg classroom with dissolve
+    "MC tidak terlalu peduli dengan ujian kali ini."
+    MC "Aku merasa sudah cukup berusaha, tidak perlu terlalu stres."
+    $ E += 10
+    narrator "Hasil ujian MC biasa saja."
+    jump semester_5_evaluation
+
+label semester_5_evaluation:
+    scene bg office with dissolve
+    "MC kembali bertemu dengan Pak Gerry untuk evaluasi."
+    gerry "Semester ini sangat penting. Bagaimana hasilnya menurutmu?"
+    if PS + DS > 130:
+        MC "Saya puas dengan hasil kerja keras saya, Pak."
+        gerry "Luar biasa! Kamu berada di jalur yang benar untuk lulus dengan baik."
+    else:
+        MC "Sepertinya saya masih bisa lebih baik, Pak."
+        gerry "Tidak apa-apa. Masih ada kesempatan di semester depan untuk memperbaiki."
+
+    narrator "MC bersiap untuk menghadapi semester terakhir sebelum lulus."
+    jump semester_6_start

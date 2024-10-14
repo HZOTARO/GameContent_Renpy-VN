@@ -2,9 +2,13 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 15: expected 'simple_expression' not found.
-    linear 0.3 xzoom = -1.0
-                     ^
+File "game/script.rpy", line 97: end of line expected.
+    show christine smile with dissolve at right 
+                                       ^
+
+File "game/script.rpy", line 98: end of line expected.
+    show joshua smile with dissolve at left
+                                    ^
 
 Ren'Py Version: Ren'Py 8.3.2.24090902
-Mon Oct 14 09:25:48 2024
+Mon Oct 14 21:36:33 2024
