@@ -2,13 +2,13 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 97: end of line expected.
-    show christine smile with dissolve at right 
-                                       ^
+File "game/script.rpy", line 180: expected 'label_name' not found.
+    jump
+        ^
 
-File "game/script.rpy", line 98: end of line expected.
-    show joshua smile with dissolve at left
-                                    ^
+File "game/script.rpy", line 181: else clause expects a non-empty block.
+    else:
+         ^
 
 Ren'Py Version: Ren'Py 8.3.2.24090902
-Mon Oct 14 21:36:33 2024
+Mon Oct 14 22:15:23 2024

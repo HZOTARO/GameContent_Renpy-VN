@@ -14,7 +14,7 @@ define DS = 0  # Design Skill
 
 # The game starts here.
 label start:
-    call semester_1
+    call semester_1 from _call_semester_1
     jump semester_2
     return
 
@@ -66,7 +66,6 @@ label semester_1:
     gerry "Hmm.. saya lihat nilaimu bagus. Teruskan ya."
     MC "Ok, Pak."
     
-    "MC bersiap-siap untuk semester kedua."
     return
 
 label semester_2:
@@ -144,6 +143,20 @@ label semester_2:
     "Joshua belum datang... Setelah beberapa waktu tetap tidak datang, kamu memutuskan untuk menelponnya"
     joshua "Maaf ya aku nggak bisa ikut kerja, masih ada urusan.."
     christine "Yasudahlah, kita kerja berdua aja."
+    show christine serious with fade
+    "Joshua kok nggak datang lagi ya.."
+    menu:
+        "Berusaha membujuk Joshua untuk bekerja":
+            "Setelah dibujuk, akhirnya Joshua ikut bekerja."
+        "Bekerja tanpa Joshua":
+            "Setelah Joshua tidak hadir terus-terusan, kalian memutuskan untuk mengerjakan proyek berdua saja."
+            show christine annoyed with dissolve
+            "Kalian bekerja dengan keras dan merasa sangat lelah, juga kesal"
+            menu:
+                "Laporkan Joshua ke Pak Gerry":
+                    jump fallout
+                "Tidak lapor ke Pak Gerry":
+                    ""
 
     scene bg college classroom with fade
     "Tiba waktunya untuk presentasi proyek."
@@ -153,12 +166,37 @@ label semester_2:
     "Kamu senang mendengar pujian dari Pak Gerry" 
 
     scene bg college teacherroom with fade
+    show gerry smile
     "Kamu bertemu kembali dengan Pak Gerry untuk evaluasi semester."
     gerry "Bagaimana perkuliahanmu satu semester ini?"
     MC "Menurut saya baik kok Pak, aman."
     gerry "Hmm.. saya lihat nilaimu bagus. Teruskan ya."
     MC "Ok, Pak."
     
+    scene black with fade
     "MC bersiap-siap untuk semester ketiga."
     
-    # jump
+    if DS > PS:
+        jump design
+    else:
+        jump prog
+
+label fallout:
+    scene bg college teacherroom with fade
+    show joshua mad at left
+    show gerry serious at right
+    "Joshua dipanggil ke ruang Pak Gerry dan ditegur. Joshua tidak lulus dan harus mengulang matakuliah PBO. Kamu tidak pernah berkomunikasi dengan Joshua lagi..."
+    jump credit
+
+label design:
+    "Setelah meneruskan perkuliahan, kamu merasa lebih cocok di bidang desain. Kamu memutuskan untuk bekerja menjadi seorang Game Designer, mendesain game secara konsep, desain level, dan gameplay dari sebuah game."
+    jump credit
+
+label prog:
+    "Setelah meneruskan perkuliahan, kamu merasa lebih cocok di bidang programming. Kamu memutuskan untuk bekerja menjadi seorang Game Programmer, mengimplementasikan logika game dan mekanik melalui programming."
+    jump credit
+    
+label credit:
+    scene credit with fade
+    ""
+    return
