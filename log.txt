@@ -1,10 +1,10 @@
-2024-10-14 15:40:20 UTC
+2024-10-14 15:40:28 UTC
 Windows-10-10.0.22631
 Ren'Py 8.3.2.24090902
 
-Early init took 0.15s
-Loading error handling took 0.41s
-Loading script took 3.97s
+Early init took 0.18s
+Loading error handling took 0.36s
+Loading script took 3.88s
 Loading save slot metadata took 0.07s
 Loading persistent took 0.00s
 Running init code took 0.28s
@@ -13,14 +13,14 @@ Analyze and compile ATL took 0.01s
 Reloading save slot metadata took 0.05s
 Index archives took 0.00s
 Backing up script files to 'C:\\Users\\ASUS\\AppData\\Roaming/RenPy/backups\\Renpy':
-Dump and make backups took 0.14s
+Dump and make backups took 0.13s
 Cleaning cache took 0.00s
 Making clean stores took 0.00s
 Initial gc took 0.07s
 DPI scale factor: 1.250000
 nvdrs: Loaded, about to disable thread optimizations.
 nvdrs: Disabled thread optimizations.
-Creating interface object took 0.47s
+Creating interface object took 0.45s
 Cleaning stores took 0.00s
 Init translation took 0.07s
 Build styles took 0.01s
